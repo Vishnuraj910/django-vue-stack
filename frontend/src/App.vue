@@ -1,13 +1,13 @@
 <template>
   <v-app>
     <v-main>
-      <Welcome/>
+      <Welcome />
     </v-main>
   </v-app>
 </template>
 
 <script>
-import Welcome from './components/Welcome.vue' 
+import Welcome from './components/Welcome.vue'
 
 export default {
   name: 'App',
@@ -19,5 +19,8 @@ export default {
   data: () => ({
     //
   }),
+  mounted() {
+    document.title = process.env.VUE_APP_NAME
+  }
 }
 </script>

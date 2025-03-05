@@ -13,7 +13,7 @@
         </h1>
       </v-col>
       <v-row align="center" justify="center">
-        <v-col cols="4" sm="4" md="4">
+        <v-col cols="8" sm="8" md="6" lg="4">
           <v-card>
             <v-card-title class="headline font-weight-bold">
               Scan to Pay
@@ -33,7 +33,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import QrcodeVue from 'qrcode.vue';
 export default {
   name: 'App',
@@ -46,18 +45,10 @@ export default {
     }
     return {
       merchantDetails,
-      paymentLink: `https://kema-payment.com/merchantUUID=${merchantDetails.merchantUUID}&amount=${merchantDetails.amount}&currency=${merchantDetails.currency}`
+      paymentLink: `https://kema-payment.com/api/process?merchantUUID=${merchantDetails.merchantUUID}&amount=${merchantDetails.amount}&currency=${merchantDetails.currency}`
     };
   },
   methods: {
-    async showQRCode() {
-      try {
-        const response = await axios.get('http://127.0.0.1:8000/api/test/');
-        this.message = response.data.message;
-      } catch (error) {
-        console.error('Error fetching message:', error);
-      }
-    }
   },
   components: {
     QrcodeVue
