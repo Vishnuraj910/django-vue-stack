@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import HelloWorldView
+from .views import KemaPayments
 
 urlpatterns = [
-    path('test/', HelloWorldView.as_view(), name='test'),
+    path('process/', KemaPayments.as_view(), name='process'),
 ]

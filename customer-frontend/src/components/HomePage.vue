@@ -83,7 +83,7 @@ export default {
         currency: this.customerDetails.currency,
         merchantUUID: searchParams.get('merchantUUID') || 'HASHED_MERCHAT_ID_0001', // TODO Fix the issue with merchantUUID
         amount: searchParams.get('amount'),
-        currency: searchParams.get('currency'),
+        merchantCurrency: searchParams.get('currency'),
         qrCode: text
       }
       if (this.customerDetails.currency !== paymentPayload.currency) {
