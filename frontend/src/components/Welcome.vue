@@ -13,7 +13,7 @@
         </h1>
       </v-col>
       <v-row align="center" justify="center">
-        <v-col cols="4" sm="4" md="4">
+        <v-col cols="8" sm="8" md="6" lg="4">
           <v-card>
             <v-card-title class="headline font-weight-bold">
               Scan to Pay
