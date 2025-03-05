@@ -9,6 +9,9 @@
         <div class="text-body-2 font-weight-light mb-5">Welcome</div>
 
         <h1 class="text-h4 font-weight-bold"> {{ customerDetails.customerName }}!</h1>
+        <div v-show="transactionId" class="text-body-2 font-weight-light mt-5 mb-5">Transaction ID: #{{ transactionId
+        }}
+        </div>
       </div>
 
       <div class="text-center mt-5 mb-10">
@@ -57,16 +60,18 @@ export default {
   data() {
     const customerDetails = { // This is a mock data. Will fetch from backend on JWT validation from cookie or after login
       customerName: 'Vishnuraj Rajagopal',
+      customerId: 1,
       device_metadata: { device: 'device1', os: 'android', browser: 'chrome' },
       balance: 100000,
-      currency: 'AED'
+      currencyId: 1
     };
     return {
       customerDetails,
       cameraOn: false,
       isLoading: false,
       showAlert: false,
-      alertMessage: ''
+      alertMessage: '',
+      transactionId: null
     };
   },
   methods: {
@@ -77,11 +82,11 @@ export default {
       const searchParams = new URLSearchParams(text);
 
       const paymentPayload = {
-        customerName: this.customerDetails.customerName,
+        customer_id: this.customerDetails.customerId,
         device_metadata: JSON.stringify(this.customerDetails.device_metadata),
         balance: this.customerDetails.balance,
-        currency: this.customerDetails.currency,
-        merchantUUID: searchParams.get('merchantUUID') || 'HASHED_MERCHAT_ID_0001', // TODO Fix the issue with merchantUUID
+        currency_id: this.customerDetails.currencyId,
+        merchant_uuid: searchParams.get('merchantUUID') || 'HASHED_MERCHAT_ID_0001', // TODO Fix the issue with merchantUUID
         amount: searchParams.get('amount'),
         merchantCurrency: searchParams.get('currency'),
         qrCode: text
@@ -92,10 +97,11 @@ export default {
         this.isLoading = false
         return
       }
-      this.processPayment(paymentPayload);
-      // setTimeout(() => {
-      //   this.isLoading = false
-      // }, 2000)
+
+      setTimeout(() => { // Adding a delay to simulate payment processing
+        this.isLoading = false
+        this.processPayment(paymentPayload);
+      }, 2000)
     },
     onLoaded() {
       console.log(`Ready to start scanning barcodes`)
@@ -106,6 +112,7 @@ export default {
         axios.post('http://127.0.0.1:8000/api/process/', paymentPayload).then(response => {
           console.log(response.data);
           this.showAlert = true
+          this.transactionId = response.data.transaction_id
           this.alertMessage = "Payment processed successfully!"
         }).catch(error => {
           this.showAlert = true
