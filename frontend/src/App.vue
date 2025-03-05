@@ -1,36 +1,26 @@
 <template>
-  <div id="app">
-    <h1>{{ message }}</h1>
-    <button @click="fetchMessage">Get Message from Django</button>
-  </div>
+  <v-app>
+    <v-main>
+      <Welcome />
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-import axios from 'axios';
+import Welcome from './components/Welcome.vue'
 
 export default {
   name: 'App',
-  data() {
-    return {
-      message: 'Welcome to Vue.js!'
-    };
-  },
-  methods: {
-    async fetchMessage() {
-      try {
-        const response = await axios.get('http://127.0.0.1:8000/api/hello/');
-        this.message = response.data.message;
-      } catch (error) {
-        console.error('Error fetching message:', error);
-      }
-    }
-  }
-};
-</script>
 
-<style>
-#app {
-  text-align: center;
-  margin-top: 60px;
+  components: {
+    Welcome,
+  },
+
+  data: () => ({
+    //
+  }),
+  mounted() {
+    document.title = process.env.VUE_APP_NAME
+  }
 }
-</style>
+</script>
