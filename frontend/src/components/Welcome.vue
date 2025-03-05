@@ -5,25 +5,29 @@
         <v-img :src="require('../assets/kema-logo.png')" class="my-3" contain height="200" />
       </v-col>
 
-      <v-col class="mb-4">
+      <v-col cols="12">
+        <h3>
+          Welcome to</h3>
         <h1 class="display-2 font-weight-bold mb-3">
-          Welcome to the Kema Merchant Payment System
+          Kema Merchant Payment System
         </h1>
       </v-col>
-      <v-col class="mb-5" cols="12">
-        <h2 class="headline font-weight-bold mb-5">
-          Scan to Pay
-        </h2>
+      <v-row align="center" justify="center">
+        <v-col cols="4" sm="4" md="4">
+          <v-card>
+            <v-card-title class="headline font-weight-bold">
+              Scan to Pay
+            </v-card-title>
 
-        <v-row justify="center">
-          <qrcode-vue :value="paymentLink" :size="200" level="H"></qrcode-vue>
-        </v-row>
-        <v-row justify="center">
-          <h3 class="merchant-name">
-            {{ merchantDetails.merchantName }}<br>
-          </h3>
-        </v-row>
-      </v-col>
+            <v-card-item justify="center">
+              <qrcode-vue :value="paymentLink" :size="200" level="H"></qrcode-vue>
+            </v-card-item>
+            <v-card-subtitle class="merchant-name">
+              {{ merchantDetails.merchantName }}<br>
+            </v-card-subtitle>
+          </v-card>
+        </v-col>
+      </v-row>
     </v-row>
   </v-container>
 </template>
