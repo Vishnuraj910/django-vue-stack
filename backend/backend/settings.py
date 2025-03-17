@@ -81,11 +81,11 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'kema_db',
-        'USER': 'kema_admin',
+        'NAME': '******',
+        'USER': '******',
         'HOST': 'localhost',
         'PORT': 5433,
-        'PASSWORD':'kema_pass'
+        'PASSWORD':'*******'
     }
 }
 
